@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace GatewayManagingAPI.Entities{
     public class Gateway{
-        public string SerialID { get; set; }
-        public string Name { get; set; }
-        public string IPv4 { get; set; }
-
+        public string SerialID { get; set; } = null!;
+        public string Name { get; set; } = null!;
+        public string IPv4 { get; set; } = null!;
     }
 }

@@ -1,3 +1,4 @@
+using GatewayManagingAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace back_end.Controllers;
@@ -12,15 +13,20 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly IRepository repo;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger,
+        IRepository repo)
     {
         _logger = logger;
+        this.repo = repo;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
+        var gateways = repo.getGateways();
+
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateTime.Now.AddDays(index),
