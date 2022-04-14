@@ -7,7 +7,8 @@ using GatewayManagingAPI.Entities;
 namespace GatewayManagingAPI.Repositories {
 
     public interface IRepository {
-        List<Gateway> getGateways();
-        public Gateway getGatewayByName(string Name);
+        Task<List<Gateway>> getGateways();
+        Task<Gateway> getGatewayBySerialID(string SerialID);
+        void addGateway(Gateway gateway);
     }
 }
