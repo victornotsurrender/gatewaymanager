@@ -7,6 +7,7 @@ using GatewayManagingAPI.Validations;
 
 namespace GatewayManagingAPI.Entities{
     public class Gateway{
+        [Key]
         [Required]
         public string SerialID { get; set; } = null!;
         [Required]

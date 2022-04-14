@@ -8,13 +8,12 @@ using System.Threading.Tasks;
 namespace GatewayManagingAPI.Entities{
     public class Peripheral{
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required]
         public int UID { get; set; }
         [Required]
         public string Vendor { get; set; } = null!;
-        
         [Required]
-        public DateOnly CreatedDate { get; set; }
-        public bool Status { get; set; } = false;
+        public DateTime CreatedDate { get; set; }
+        public bool Status { get; set; } = false!;
     }
 }

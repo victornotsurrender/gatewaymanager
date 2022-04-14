@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace GatewayManagingAPI.Entities{
-    public class GatewayPeripherals{
+    public class GatewayPeripheral{
         [Required]
         [Key]
         public string SerialID { get; set; } = null!;
