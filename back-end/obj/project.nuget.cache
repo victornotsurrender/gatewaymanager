@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "8Lr5N4th4zkf5Yr0Fozt/IrFitJdMf6lS7PvoYGwsFRJyGSGasKb/zkCLYgBtbYmEJgdCkKsT1XKpgiseXWzEA==",
+  "dgSpecHash": "PzM/Y+AM7kVIIe4m5MSifh20MWAGpJVnUWdKpnyJ+0APrBUBMhjFTKlRkX48mSptCOovD/NTTLF51GXlfK4HIQ==",
   "success": true,
   "projectFilePath": "D:\\Real Work\\Web Development\\Angular\\GatewayManager\\back-end\\back-end.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Arunas\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
+    "C:\\Users\\Arunas\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\Arunas\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
-    "C:\\Users\\Arunas\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\Arunas\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Arunas\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\Arunas\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\Arunas\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.4\\microsoft.entityframeworkcore.6.0.4.nupkg.sha512",
