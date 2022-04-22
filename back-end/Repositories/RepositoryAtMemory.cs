@@ -155,7 +155,8 @@ namespace GatewayManagingAPI.Repositories{
             }
             return found;
         }
-         public async Task<bool> modifyPeripheral(Peripheral peripheral){
+        
+        public async Task<bool> modifyPeripheral(Peripheral peripheral){
             bool found = false;
             for ( int i = 0; !found && i < peripherals.Count; ++i ){
                 Peripheral curr = peripherals[i];
@@ -165,6 +166,24 @@ namespace GatewayManagingAPI.Repositories{
                     await Task.Delay(1);
                     RepositoryAtMemory.remotePeripherals = peripherals;
                     found = true;
+                }
+            }
+            return found;
+        }
+
+        public int genUID(){
+            List<int> tmp = new List<int>(); 
+            foreach ( Peripheral curr in ){
+                tmp.Add(curr.UID);
+            }
+            int found = 0;
+            for ( int i = 1; found == 0; ++i ){
+                bool not_taked = true;
+                foreach ( int curr in tmp ){
+                    ok &= curr != i;
+                }
+                if ( not_taked ){
+                    found = i;
                 }
             }
             return found;

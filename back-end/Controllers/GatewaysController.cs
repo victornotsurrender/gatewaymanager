@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GatewayManagingAPI.Entities;
 using GatewayManagingAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using GatewayManagingAPI.DTOs;
 
 namespace GatewayManagingAPI.Controllers{
 
@@ -21,24 +22,28 @@ namespace GatewayManagingAPI.Controllers{
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Gateway>>> Get(){
-            return await repo.getGateways();
+        public async Task<ActionResult<List<GatewayDTO>>> Get(){
+            var gateways = await repo.getGateways();
+            List<GatewayDTO> gatewaysDTO = new List<GatewayDTO>();
+            foreach ( Gateway gateway in gateways ){
+                gatewaysDTO.Add( gateway.getGatewayDTO() );
+            }
+            return gatewaysDTO;
         }
         
         [HttpGet("{SerialID}")]
-        public async Task<ActionResult<Gateway>> Get(string SerialID){
+        public async Task<ActionResult<GatewayDTO>> Get(string SerialID){
             var gateway = await repo.getGatewayBySerialID(SerialID);
-            
             if ( gateway == null ){
                 logger.LogError("Not Found SerialID: "+SerialID);
                 return NotFound();
             }
 
-            return gateway;
+            return gateway.getGatewayDTO();
         }
         
         [HttpGet("{SerialID}/{devicesStr}")]
-        public async Task<ActionResult<List<Peripheral>>> Get(string SerialID, string devicesStr){
+        public async Task<ActionResult<List<PeripheralDTO>>> Get(string SerialID, string devicesStr){
             if ( !devicesStr.Equals("devices") ){
                 return NotFound();
             }
@@ -46,43 +51,48 @@ namespace GatewayManagingAPI.Controllers{
             if ( peripherals == null ){
                 return NotFound();
             }
-            return peripherals;
+            List<PeripheralDTO> peripheralsDTO = new List<PeripheralDTO>();
+            foreach ( Peripheral peripheral in peripherals ){
+                peripheralsDTO.Add(peripheral.getPeripheralDTO());
+            }
+            return peripheralsDTO;
         }
         
         [HttpGet("{SerialID}/devices/{UID:int}")]
         [HttpGet("{SerialID}/{UID:int}")]
-        public async Task<ActionResult<Peripheral>> Get(string SerialID, int UID){
+        public async Task<ActionResult<PeripheralDTO>> Get(string SerialID, int UID){
             var peripheral = await repo.getGatewayPeripheral(SerialID, UID);
             if ( peripheral == null ){
                 return NotFound();
             }
-            return peripheral;
+            return peripheral.getPeripheralDTO();
         }
 
         [HttpPost]
-        public async void Post([FromBody] Gateway gateway){
-            if ( gateway == null ){
+        public async void Post([FromBody] GatewayDTO gatewayDTO){
+            if ( gatewayDTO == null ){
                 logger.LogInformation("Accessed to Post with null gateway");
                 return;
             }
             List<Gateway> gateways = await repo.getGateways();
             foreach ( Gateway curr in gateways ){
-                if ( curr.SerialID.Equals( gateway.SerialID ) ){
-                    logger.LogError("Failed to add the gateway. SerialID "+gateway.SerialID+" is already taken");
+                if ( curr.SerialID.Equals( gatewayDTO.SerialID ) ){
+                    logger.LogError("Failed to add the gateway. SerialID "+gatewayDTO.SerialID+" is already taken");
                     return;
                 }
             }
-            await repo.addGateway(gateway);
-            logger.LogInformation("Success. Added the gateway with serial "+gateway.SerialID);
+            await repo.addGateway(gatewayDTO.getGateway());
+            logger.LogInformation("Success. Added the gateway with serial "+gatewayDTO.SerialID);
         }
 
         [HttpPost("{SerialID}")]
-        public async void Post(string SerialID, [FromBody] Peripheral peripheral){
-            if ( peripheral == null ){
+        public async void Post(string SerialID, [FromBody] PeripheralDTO peripheralDTO){
+            if ( peripheralDTO == null ){
                 logger.LogInformation("Accessed to Post with null device");
                 return;
             }
             List<Peripheral> peripherals = await repo.getGatewayPeripherals(SerialID);
+            Peripheral peripheral = peripheralDTO.getPeripheral();
             bool ok = await repo.addPeripheral(peripheral);
             if ( !ok ){
                 logger.LogError("Failed to add the device. UID "+peripheral.UID+" is already taken");

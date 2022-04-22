@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using GatewayManagingAPI.Validations;
-using GatewayManagingAPI.DTOs;
+using GatewayManagingAPI.Entities;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GatewayManagingAPI.Entities{
-    public class Gateway{
+namespace GatewayManagingAPI.DTOs{
+    public class GatewayDTO{
         [Key]
         [Required]
         public string SerialID { get; set; } = null!;
@@ -17,8 +18,8 @@ namespace GatewayManagingAPI.Entities{
         [IPv4]
         public string IPv4 { get; set; } = null!;
 
-        public GatewayDTO getGatewayDTO(){
-            GatewayDTO ret = new GatewayDTO();
+        public Gateway getGateway(){
+            Gateway ret = new Gateway();
             ret.SerialID = this.SerialID;
             ret.Name = this.Name;
             ret.IPv4 = this.IPv4;
