@@ -11,6 +11,7 @@ namespace GatewayManagingAPI.Repositories{
         private List<GatewayPeripheral> gatewayPeripherals = null!;
         private List<Peripheral> peripherals = null!;
 
+        static private List<int> pUID = null!;
         private static List<Gateway> remoteGateways = new List<Gateway>(){
             new Gateway(){SerialID = "KJJFS-15", Name = "Router John Salsa", IPv4 = "192.168.43.228"},
             new Gateway(){SerialID = "YUSII-05", Name = "TP-Link Gordo", IPv4 = "192.168.43.137"},
@@ -34,6 +35,12 @@ namespace GatewayManagingAPI.Repositories{
             gateways = remoteGateways;
             peripherals = remotePeripherals;
             gatewayPeripherals = remoteGatewaysPeripherals;
+            if ( pUID == null ){
+                pUID = new List<int>();
+                foreach ( Peripheral p in peripherals ){
+                    pUID.Add(p.UID);
+                }
+            }
         }
 
         public async Task<List<Gateway>> getGateways(){
@@ -103,6 +110,7 @@ namespace GatewayManagingAPI.Repositories{
             if ( result ){
                 await Task.Delay(1);
                 this.peripherals.Add(peripheral);
+                pUID.Add( peripheral.UID );
                 RepositoryAtMemory.remotePeripherals = peripherals;
             }
             after = RepositoryAtMemory.remotePeripherals.Count;
@@ -130,6 +138,11 @@ namespace GatewayManagingAPI.Repositories{
                 if ( curr.SerialID.Equals(SerialID) && curr.UID == UID ){
                     foreach ( Peripheral rem in peripherals ){
                         if ( rem.UID == UID ){
+                            foreach ( int id in pUID ){
+                                if ( id == UID ){
+                                    pUID.Remove( id );
+                                }
+                            }
                             this.peripherals.Remove(rem);
                             RepositoryAtMemory.remotePeripherals = peripherals;
                             await Task.Delay(1);
@@ -171,16 +184,16 @@ namespace GatewayManagingAPI.Repositories{
             return found;
         }
 
-        public int genUID(){
+        public static int genUID(){
             List<int> tmp = new List<int>(); 
-            foreach ( Peripheral curr in ){
-                tmp.Add(curr.UID);
+            foreach ( int curr in pUID ){
+                tmp.Add(curr);
             }
             int found = 0;
             for ( int i = 1; found == 0; ++i ){
                 bool not_taked = true;
                 foreach ( int curr in tmp ){
-                    ok &= curr != i;
+                    not_taked &= curr != i;
                 }
                 if ( not_taked ){
                     found = i;
