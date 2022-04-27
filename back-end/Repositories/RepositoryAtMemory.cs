@@ -47,11 +47,6 @@ namespace GatewayManagingAPI.Repositories{
             await Task.Delay(1);
             return gateways;
         }
-        
-        public async Task<List<Peripheral>> getPeripherals(){
-            await Task.Delay(1);
-            return peripherals;
-        }
 
         public async Task<Gateway> getGatewayBySerialID(string SerialID){
             await Task.Delay(1);
@@ -98,6 +93,11 @@ namespace GatewayManagingAPI.Repositories{
             after = RepositoryAtMemory.remoteGateways.Count;
             result &= before == after-1;
             return result;
+        }
+
+        public async Task<List<Peripheral>> getPeripherals(){
+            await Task.Delay(1);
+            return peripherals;
         }
         public async Task<bool> addPeripheral(Peripheral peripheral){
             bool result = true;

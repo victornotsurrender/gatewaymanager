@@ -12,6 +12,7 @@ namespace GatewayManagingAPI.Repositories {
         Task<bool> addGateway(Gateway gateway);
         Task<bool> delGateway(string SerialID);
         Task<bool> modifyGateway(Gateway gateway);
+        Task<List<Peripheral>> getPeripherals();
         Task<List<Peripheral>> getGatewayPeripherals(string SerialID);
         Task<Peripheral> getGatewayPeripheral(string SerialID, int UID);
         Task<bool> addPeripheral(Peripheral peripheral);
