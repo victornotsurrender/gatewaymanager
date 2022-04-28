@@ -43,10 +43,21 @@ namespace GatewayManagingAPI.Controllers{
         }
         
         [HttpGet("{SerialID}/{devicesStr}")]
+        [HttpGet("/{SerialID}/{devicesStr}")]
         public async Task<ActionResult<List<PeripheralDTO>>> Get(string SerialID, string devicesStr){
             if ( !devicesStr.Equals("devices") ){
                 return NotFound();
             }
+
+            if ( HttpContext.Request.Path.Equals("/api/devices") ){
+                List<Peripheral> peripheralsList = await repo.getPeripherals();
+                List<PeripheralDTO> peripheralsDTOs = new List<PeripheralDTO>();
+                foreach ( Peripheral peripheral in peripheralsList ){
+                    peripheralsDTOs.Add(peripheral.getPeripheralDTO());
+                }
+                return peripheralsDTOs;
+            }
+
             var peripherals = await repo.getGatewayPeripherals(SerialID);
             if ( peripherals == null ){
                 return NotFound();
