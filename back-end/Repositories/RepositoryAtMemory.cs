@@ -16,19 +16,36 @@ namespace GatewayManagingAPI.Repositories{
             new Gateway(){SerialID = "KJJFS-15", Name = "Router John Salsa", IPv4 = "192.168.43.228"},
             new Gateway(){SerialID = "YUSII-05", Name = "TP-Link Gordo", IPv4 = "192.168.43.137"},
             new Gateway(){SerialID = "ASKOF-05", Name = "Wifi Etecsa", IPv4 = "192.168.43.138"},
+            new Gateway(){SerialID = "MALO-23", Name = "Pudusa the Spoon Destroyer", IPv4 = "192.168.43.8"},
+            new Gateway(){SerialID = "WERQ-89", Name = "Weirdos Over Here", IPv4 = "192.162.1.14"},
+            new Gateway(){SerialID = "IO657-76", Name = "One Thousand IQ", IPv4 = "192.168.10.10"},
             new Gateway(){SerialID = "ALSKD-23", Name = "Wifi03", IPv4 = "192.168.43.144"}
         };
+        
         private static List<GatewayPeripheral> remoteGatewaysPeripherals = new List<GatewayPeripheral>(){
             new GatewayPeripheral(){SerialID = "YUSII-05", UID = 1},
             new GatewayPeripheral(){SerialID = "ASKOF-05", UID = 5},
             new GatewayPeripheral(){SerialID = "KJJFS-15", UID = 23},
+            new GatewayPeripheral(){SerialID = "MALO-23", UID = 98},
+            new GatewayPeripheral(){SerialID = "MALO-23", UID = 16},
+            new GatewayPeripheral(){SerialID = "MALO-23", UID = 11},
+            new GatewayPeripheral(){SerialID = "MALO-23", UID = 12},
+            new GatewayPeripheral(){SerialID = "WERQ-89", UID = 14},
+            new GatewayPeripheral(){SerialID = "IO657-76", UID = 18},
             new GatewayPeripheral(){SerialID = "KJJFS-15", UID = 22}
         };
+
         private static List<Peripheral> remotePeripherals = new List<Peripheral>(){
             new Peripheral(){UID = 1, Vendor = "That Guy", CreatedDate = new DateTime(2000, 4, 6), Status = true},
             new Peripheral(){UID = 5, Vendor = "My Neighbour", CreatedDate = new DateTime(2015, 12, 31), Status = false},
             new Peripheral(){UID = 23, Vendor = "Obviously Me", CreatedDate = new DateTime(), Status = true},
-            new Peripheral(){UID = 22, Vendor = "Obviously Me", CreatedDate = new DateTime(), Status = true}
+            new Peripheral(){UID = 22, Vendor = "Obviously Me", CreatedDate = new DateTime(), Status = true},
+            new Peripheral(){UID = 12, Vendor = "No one knows", CreatedDate = new DateTime(), Status = false},
+            new Peripheral(){UID = 14, Vendor = "Monster Inc.", CreatedDate = new DateTime(), Status = true},
+            new Peripheral(){UID = 16, Vendor = "Copr. Fund", CreatedDate = new DateTime(), Status = true},
+            new Peripheral(){UID = 18, Vendor = "Ninja Des", CreatedDate = new DateTime(), Status = true},
+            new Peripheral(){UID = 98, Vendor = "The Black Guy Over There", CreatedDate = new DateTime(), Status = true},
+            new Peripheral(){UID = 11, Vendor = "Not Me", CreatedDate = new DateTime(), Status = false}
         };
 
         public RepositoryAtMemory(){
